@@ -1,0 +1,10 @@
+{
+  "name": "NodeChat",
+  "version": "0.0.1",
+  "description": "Real time web chat and first Node.js/socket.io app",
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.6"
+  },
+  "author": "Brandon Burciaga"
+}

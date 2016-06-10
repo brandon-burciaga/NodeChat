@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+</head>
+
+<body>
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    
+    <script>
+    var socket = io();
+
+    // listener, server emits 'connect', prompt user for username
+    socket.on('connect', function() {
+        socket.emit('adduser', prompt("What is your user name?"));
+    });
+
+    // listener, server emits 'updatechat', update the chat body
+    socket.on('updatechat', function(username, data) {
+        $('#messages').append('<b>' + username + ':</b> ' + data + '<br>');
+    });
+
+    // listener, server emits 'updateusers', update the activeNames list
+    socket.on('updateusers', function(data) {
+        $('#users').empty();
+        $.each(data, function(key, value) {
+            $('#users').append('<div>' + key + '</div>');
+        });
+    });
+
+    // when the client clicks 'send' or hits 'enter' on keyboard,
+    // tell server to execute 'sendchat' and send the message as a param,
+    // then refocus on message input box
+    $(function() {
+        $('#datasend').click(function() {
+            var message = $('#message').val();
+            $('#message').val('').focus();
+            socket.emit('sendchat', message);
+        });
+
+        $('#message').keypress(function(e) {
+            if (e.which == 13) {
+                $(this).blur();
+                $('#datasend').focus().click();
+                $('#').focus();
+            }
+        });
+    });
+    </script>
+
+    <div class="container">
+        <div class="header">NodeChat web application!</div>
+        <h2>An easy place to chat with your friends</h2>
+        <p>Don't worry, there will be plenty of features and customization added soon enough</p>
+        <div class="userList">
+            <b>Current users online</b>
+            <div id="users"></div>
+        </div>
+        <div class="messageDiv">
+            <div id="messages"></div>
+        </div>
+    </div>
+    <div class="inputDiv">
+        <input id="message"/>
+        <input type="button" id="datasend" value="send" />
+    </div>
+</body>
+
+</html>

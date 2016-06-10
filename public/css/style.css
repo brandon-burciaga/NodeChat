@@ -1,0 +1,47 @@
+.header {
+    font-size: 48px;
+    color: blue;
+    font-weight: bolder;
+}
+
+.container p {
+	font-style: italic;
+}
+
+.userList {
+    float: left;
+    width: 200px;
+    border-right: 1px solid black;
+    height: 300px;
+    padding: 10px;
+    overflow: scroll-y;
+}
+
+.messageDiv {
+    float: left;
+    width: 300px;
+    height: 300px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.messages {
+	max-height: 300px;
+	overflow: auto;
+}
+
+.inputDiv {
+	width: 350px;
+	margin-left: 222px;
+}
+
+#message {
+    width: 250px;
+    height: 30px;
+}
+
+#datasend {
+	height: 30px;
+	font-size: 18px;
+	display: inline-block;
+}
