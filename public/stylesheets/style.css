@@ -9,12 +9,12 @@
 }
 
 .userList {
+    font-size: 18px;
     float: left;
     width: 200px;
     border-right: 1px solid black;
     height: 300px;
     padding: 10px;
-    overflow: scroll-y;
 }
 
 .messageDiv {
@@ -25,8 +25,9 @@
     padding: 10px;
 }
 
-.messages {
+#messages {
 	max-height: 300px;
+    font-size: 18px;
 	overflow: auto;
 }
 
@@ -40,7 +41,7 @@
     height: 30px;
 }
 
-#datasend {
+#sendButton {
 	height: 30px;
 	font-size: 18px;
 	display: inline-block;
