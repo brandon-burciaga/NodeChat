@@ -4,11 +4,13 @@ Real time chat application built using Node.js, Socket.io, and Express.js
 
 #### Running NodeChat
 
-Clone repository into empty directory:
+First, please make sure you have [npm](https://docs.npmjs.com/getting-started/installing-node) installed correctly before running the below commands.
+
+With npm installed, clone the NodeChat repository into an empty directory:
 
 	git clone https://github.com/bmb0205/NodeChat.git TargetDirectory/
 
-Cd into TargetDirectory/, then run:
+cd into TargetDirectory/, then run:
 
 	npm install
 
@@ -24,10 +26,13 @@ Check out [ngrok](https://www.ngrok.com) if you want to create a secure public U
 		|--public/
 		|	|
 		|	|--css/
-		|		|--style.css
+		|	|	|--style.css
+		|	|
+		|	|--app.js
+		|	|--index.html
+		|	|--main.js
 		|
-		|--index.html
-		|--app.js
 		|--package.json
 		|--README.md
+		|--.gitignore
 
