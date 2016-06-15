@@ -3,16 +3,21 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 
+// http server listening on port 3000
+http.listen(3000, function() {
+    console.log('Server connected...listening on *.3000');
+});
+
 // direct to styles, external js, etc
 app.use(express.static(__dirname + '/public'));
 
-// initialize socket.io instance by passing http object
-var io = require('socket.io')(http);
-
-// serves index.html 
+// serves index.html as response
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
+// initialize socket.io instance by passing http object
+var io = require('socket.io')(http);
 
 // current active users
 var activeNames = {};
@@ -21,12 +26,12 @@ var activeNames = {};
 io.on('connection', function(socket) {
     console.log('user connected');
 
-    // client emits 'sendchat', sends chat message
+    // when client emits 'sendchat', sends chat message
     socket.on('sendchat', function(data) {
         io.sockets.emit('updatechat', socket.username, data);
     });
 
-    // client emits 'adduser', adds user
+    // when client emits 'adduser', adds user
     socket.on('adduser', function(username) {
 
         // store user name in socket session for specific client
@@ -45,7 +50,7 @@ io.on('connection', function(socket) {
         io.sockets.emit('updateusers', activeNames);
     });
 
-    // client emits 'disconnect', disconnects user
+    // when client emits 'disconnect', disconnects user
     socket.on('disconnect', function() {
 
         // remove user from activeNames
@@ -57,9 +62,4 @@ io.on('connection', function(socket) {
         // echo to all clients the user has left
         io.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected!');
     });
-});
-
-// http server listening on port 3000
-http.listen(3000, function() {
-    console.log('Server connected...listening on *.3000');
 });
